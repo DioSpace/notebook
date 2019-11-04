@@ -13,3 +13,7 @@ git checkout master/branch //切换到某个分支
 git checkout -b test //新建test分支
 git branch -d test  //删除test分支
 git branch -D test //强制删除
+
+git status //查看当前分支有哪些修改
+git log //查看当前分支上面的日志信息
+git reset --hard HEAD //还原到之前的某个版本
