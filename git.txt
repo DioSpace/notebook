@@ -6,15 +6,52 @@ git pull //把远程库的代码更新到工作台
 git pull --rebase origin master //强制把远程库的代码跟新到当前分支上面
 git fetch //把远程库的代码更新到本地库
 git add . //把本地的修改加到stage中
-git commit -m 'comments here' //把stage中的修改提交到本地库
+git commit -m <branch name> //把stage中的修改提交到本地库
 git push //把本地库的修改提交到远程库中
-git branch  //查看本地分支
-git branch -r/-a //查看远程分支/全部分支
 git checkout master/branch //切换到某个分支
-git checkout -b test //新建test分支
 git branch -d test  //删除test分支
 git branch -D test //强制删除
-
 git status //查看当前分支有哪些修改
 git log //查看当前分支上面的日志信息
-git reset --hard HEAD //还原到之前的某个版本
+
+
+查看分支：git branch
+git branch  //查看本地分支
+git branch -r/-a //查看远程分支/全部分支
+创建分支：git branch <name>
+切换分支：git checkout <name>
+创建+切换分支：git checkout -b <name>
+合并某分支到当前分支：git merge <name>
+git merge --no-ff -m "merged bug fix 101" issue-101
+分支合并的时候加上--no-ff -m "xx" 参数可以在合并之后有记录可查询。
+删除分支：git branch -d <name>
+如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
+用git log --graph命令可以看到分支合并图。
+恢复git rm 的文件：
+1、查看删除的文件 git status
+2、把文件从缓存区恢复到工作区 git reset HEAD test.txt
+3、丢弃工作区的修改 git checkout -- test.txt
+工作目录删除文件之后只需执行第三步恢复即可
+git reflog查看操作log
+git reset --hard commit_id 版本回退
+当前工作现场“储藏”起来（在当前需要保存的分支进行操作） git stash
+查看当前保存的操作 git stash list
+恢复方式是用git stash pop，恢复的同时把stash内容也删了
+
+本地新建的分支如果不推送到远程，对其他人就是不可见的；
+从本地推送分支，使用git push origin dev，如果推送失败，先用git pull抓取远程的更新然后再提交；
+在本地创建和远程分支对应的分支，使用git checkout -b dev origin/dev，本地和远程分支的名称最好一致；
+如果git push origin dev的时候报错旧的需要进行关联操作
+建立本地分支和远程分支的关联，使用git branch --set-upstream dev origin/dev
+从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
+命令git tag -a <tagname> -m "blablabla..."可以指定标签信息
+
+查看提交的结构图 git log --graph --pretty=oneline --abbrev-commit
+查看远程库信息 git remote -v
+删除远程分支 git push origin :dev
+查看标签 git tag
+删除标签 git tag -d v0.1
+查看某个标签的详情 git show tag_name
+推送一个本地标签 git push origin <tagname>
+推送全部未推送过的本地标签 git push origin --tags
+删除一个远程标签 git push origin :refs/tags/<tagname>
