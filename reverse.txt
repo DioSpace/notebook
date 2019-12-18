@@ -30,10 +30,9 @@ dump.py XX.ipa/bundleID
 
 3.反编译
 (参考资料 https://www.jianshu.com/p/85d951941c45)
-下载反编译工具 如:Class-Dump  下载地址：http://stevenygard.com/projects/class-dump
-下载完后将class-dump可执行文件 移到/usr/local/bin 下,以后就可以全局执行class-dump命令
-因为class-dump 只能处理xx.app后缀的文件,所以要处理xx.ipa包
-其实ipa包就是一个压缩的zip文件,可以把xx.ipa后缀改成xx.zip,然后对xx.zip进行解压。解压后得到的文件Payload 里就是xx.app文件
+下载反编译工具 如:Class-Dump  下载地址:http://stevenygard.com/projects/class-dump
+下载完后 双击class-dump-3.5.dmg文件打开 将class-dump可执行文件 移到/usr/local/bin 下,以后就可以全局执行class-dump命令
+因为class-dump 只能处理xx.app后缀的文件,所以要对xx.ipa包再进行处理
+其实ipa包就是一个zip压缩文件,可以把xx.ipa后缀改成xx.zip,然后对xx.zip进行解压。解压后得到的文件Payload 里就是xx.app
 最后一步处理xx.app文件,命令如下:
 class-dump -H  xx/Payload/xx.app  -o /Users/apple/Desktop/result  #xx.app是要处理的包, /Users/apple/Desktop/result是反编译后的文件输出位置
-
