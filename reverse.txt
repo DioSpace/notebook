@@ -1,1 +1,39 @@
+iOS逆向过程
+
+1.越狱
+注:以下是非在线越狱
+下载 checkra1n,并在电脑上安装  (下载地址:https://checkra.in/#release)
+手机通过USB连接电脑,打开checkra1n软件,根据提示操作既可完成越狱的过程.
+越狱完成后在手机上装Cydia商店
+
+2.砸壳
+(参考资料  https://www.jianshu.com/p/0fd958568db5,https://www.jianshu.com/p/db6729d9d3ff)
+#手机上设置
+2.1.1 打开cydia添加源: https://build.frida.re
+2.1.2 添加源,安装Frida
+#电脑上设置
+2.2.1 在电脑配置python开发环境及其他配置
+安装python,pip 砸壳脚本是用python写的
+安装usbmuxd  与手机通信
+frida-ios-dump脚本配置全局路径
+2.3.1   vim ~/.bash_profile, alias dump.py="/opt/dump/frida-ios-dump-master/dump.py", source ~/.bash_profile
+#砸壳开始
+2.4.1
+打开第一个Client   通过USB使用ssh连接设备，将22映射到电脑上的2222端口
+iproxy 2222 22  
+2.4.2
+打开第二个Client   另开终端加入连接 密码为设备的登录密码alpine，需要保持连接
+ssh -p 2222 root@127.0.0.1  或 ssh root@127.0.0.1 -p 2222
+2.4.3
+dump.py -l  #列手机上所有可砸的APP
+dump.py XX.ipa/bundleID
+
+3.反编译
+(参考资料 https://www.jianshu.com/p/85d951941c45)
+下载反编译工具 如:Class-Dump  下载地址：http://stevenygard.com/projects/class-dump
+下载完后将class-dump可执行文件 移到/usr/local/bin 下,以后就可以全局执行class-dump命令
+因为class-dump 只能处理xx.app后缀的文件,所以要处理xx.ipa包
+其实ipa包就是一个压缩的zip文件,可以把xx.ipa后缀改成xx.zip,然后对xx.zip进行解压。解压后得到的文件Payload 里就是xx.app文件
+最后一步处理xx.app文件,命令如下:
+class-dump -H  xx/Payload/xx.app  -o /Users/apple/Desktop/result  #xx.app是要处理的包, /Users/apple/Desktop/result是反编译后的文件输出位置
 
