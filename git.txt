@@ -6,7 +6,7 @@ git pull //把远程库的代码更新到工作台
 git pull --rebase origin master //强制把远程库的代码跟新到当前分支上面
 git fetch //把远程库的代码更新到本地库
 git add . //把本地的修改加到stage中
-git commit -m <branch name> //把stage中的修改提交到本地库
+git commit -m 'message' //把stage中的修改提交到本地库, message是这次提交的说明,如作了什么修改
 git push //把本地库的修改提交到远程库中
 git checkout master/branch //切换到某个分支
 git branch -d test  //删除test分支
