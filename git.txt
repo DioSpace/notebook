@@ -20,7 +20,7 @@ git branch  //查看本地分支
 git branch -r/-a //查看远程分支/全部分支
 创建分支：git branch <name>
 切换分支：git checkout <name>
-创建+切换分支：git checkout -b <name>
+创建+切换分支：git checkout -b <name>   //从已有的分支创建新的分支
 合并某分支到当前分支：git merge <name>
 git merge --no-ff -m "merged bug fix 101" issue-101
 分支合并的时候加上--no-ff -m "xx" 参数可以在合并之后有记录可查询。
