@@ -1,0 +1,50 @@
+//创建表(hbase不存在这个表)
+CREATE TABLE IF NOT EXISTS us_population (
+state CHAR(12) NOT NULL,  
+city VARCHAR NOT NULL,  
+population BIGINT  
+CONSTRAINT my_pk PRIMARY KEY (state, city));
+//插入/更改数据
+UPSERT INTO US_POPULATION VALUES ('1','name',9999);
+//查询数据
+select * from TEST_PHOENOX;
+//删除表
+drop table US_POPULATION;
+
+
+//在phoenix中建立student表与hbase中已经有的student表关联		 table
+create table "student"("ROW" varchar primary key, "name"."country" varchar, "address"."home" varchar , "address"."scholl" varchar);
+//删除表
+drop table "student";
+
+//在phoenix中建立test视图与hbase中已经有的test表关联				 view
+create view "test" ("ROW" varchar primary key, "cf"."a" varchar,"cf"."b" varchar,"cf"."c" varchar,"cf"."d" varchar);
+create view "testschedule" ("ROW" varchar primary key, "fields"."id" varchar,, "fields"."playerId" varchar,, "fields"."sex" varchar,, "fields"."age" varchar,, "fields"."threadId" varchar);
+//删除view
+drop view "test";
+//查询test视图
+select * from "test";
+select "cf"."a" from "test";
+select "ROW","cf"."b" from "test";
+select "ROW","cf"."a","cf"."b" from "test";
+select * from "test" where "ROW" = 'row';
+select * from "test" where "cf"."a" = 'A';
+select "ROW","cf"."a","cf"."b","cf"."c" from "test" where "ROW" = 'row1';
+select "ROW","cf"."a","cf"."b","cf"."c" from "test" where "ROW" = 'row1' and "cf"."a" = 'value1';
+
+//查看当前索引表
+!indexes "test"
+//创建索引
+create index my_name on usertable (lastname);
+create index aa on "test" ("cf"."a");
+强制使用索引表
+select /*+ INDEX(USERTABLE MY_NAME) */ * from my_name where lastname = 'perl';
+select * from aa where "cf:a" = 'value1';
+select * from "log_playergame" limit 100;
+
+/******** 启动phoenix shell脚本 **********/
+在/data/apache-phoenix-4.13.1-HBase-1.2-bin/bin目录下
+//启动
+./sqlline.py master:2181
+//退出命令行的方式是执行 !quit
+!quit

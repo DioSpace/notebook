@@ -1,0 +1,45 @@
+sqoop import  		\
+ --connect jdbc:mysql://192.168.200.21:3306/mydb 		\
+ --username root 		\
+ --password 1234 		\
+ --table tt	 		\
+ --m1		 		
+
+sqoop import --connect jdbc:mysql://192.168.200.21:3306/mydb --username root --password 1234 --table tt -m1
+
+sqoop import --connect jdbc:mysql://192.168.200.21:3306/mydb --username root --password 1234 --table tt --hive-import -m1
+
+默认导入位置:	/user/root/
+
+sqoop import --connect jdbc:mysql://192.168.200.21:3306/mydb --username root --password 1234 --where id=1 --target-dir /wherequery --table tt -m1
+sqoop import --connect jdbc:mysql://192.168.200.21:3306/mydb --username root --password 1234 --where "name='aa'" --target-dir /wherequery --table tt -m1
+
+sqoop import --connect jdbc:mysql://192.168.200.21:3306/mydb --username root --password 1234 	\
+--target-dir /wherequery2 				\
+--query 'select id,name,age from tt where id > 3 and $CONDITIONS'			\
+--fields-terminated-by '\t'			\
+-m1
+sqoop import --connect jdbc:mysql://192.168.200.21:3306/mydb --username root --password 1234  --target-dir /wherequery2 -query 'select id,name,age from tt where id > 3 and $CONDITIONS' --split-by id --fields-terminated-by '\t'  -m1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

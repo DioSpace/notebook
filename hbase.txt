@@ -1,0 +1,73 @@
+create 'student','name','address' 
+put 'student','1','name:country','china'
+get 'student','1'
+put 'student','1','address:home','shenzhen street'
+put 'student','1','address:scholl','New Yero'
+get 'student','1',{COLUMN=>'address:home'}
+
+create 'test', 'cf'
+list 'test'  
+put 'test', 'row1', 'cf:a', 'value1'  
+put 'test', 'row2', 'cf:b', 'value2'  
+put 'test', 'row3', 'cf:c', 'value3'  
+put 'test', 'row4', 'cf:d', 'value4'  
+scan 'test'  
+get 'test', 'row1'  
+disable 'test'  
+enable 'test
+
+create 'testschedule','fields'
+put 'testschedule','1','fields:id','1313144141233'
+put 'testschedule','1','fields:playerId','99999'
+put 'testschedule','1','fields:sex','man'
+put 'testschedule','1','fields:age','8'
+put 'testschedule','1','fields:threadId','0000'
+
+
+//创建命名空间
+create_namespace 'workpro'
+//显示所有命名空间 
+list_namespace
+//根据命名空间创建表 
+create 'workpro:log_playergame','fields'
+//往hbase表中添加数据
+put 'workpro:log_playergame','row1','fields:a','A'
+
+从表删除特定单元格
+delete ‘<table name>’, ‘<row>’, ‘<column name >’, ‘<time stamp>’
+delete 'emp', '1', 'personal data:city',
+
+//清空表
+truncate 'workpro:log_playergame'
+//统计行数
+count 'workpro:log_playergame'
+count 'workpro:log_playergame', INTERVAL => 10000
+
+1. 启动ZooKeeper
+/data/yunva/zookeeper-3.4.6/bin/zkServer.sh start		//每台服务器都要启动
+2. 启动hadoop
+/data/yunva/hadoop-2.7.3/sbin/start-all.sh
+3. 启动hbase
+/data/yunva/hbase-1.2.5/bin/start-hbase.sh
+4. 停止hbase
+stop-hbase.sh
+5.启动shell client
+hbase shell
+
+4. 启动后，master上进程和slave进程列表
+[root@master ~]# jps
+Jps
+SecondaryNameNode   # hadoop进程
+NameNode            # hadoop master进程
+ResourceManager     # hadoop进程
+HMaster             # hbase master进程
+ZooKeeperMain      # zookeeper进程
+
+[root@slave1 ~]# jps
+Jps
+ZooKeeperMain       # zookeeper进程
+DataNode             # hadoop slave进程
+HRegionServer        # hbase slave进程
+
+
+/usr/bin

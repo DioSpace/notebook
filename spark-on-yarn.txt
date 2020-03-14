@@ -1,0 +1,39 @@
+./bin/spark-submit --class org.apache.spark.examples.SparkPi    \
+--master yarn \
+--deploy-mode cluster \ 
+--driver-memory 1g 	\
+--executor-memory 1g	\
+--executor-cores 2	\
+--queue default		\
+examples/jars/spark-examples_2.11-2.1.0.jar	\
+10
+
+
+
+./bin/spark-submit --class org.apache.spark.examples.SparkPi    \
+--master yarn \
+--deploy-mode client \ 
+--driver-memory 1g 	\
+--executor-memory 1g	\
+--executor-cores 2	\
+--queue default		\
+examples/jars/spark-examples_2.11-2.1.0.jar	\
+10
+
+
+./bin/spark-submit --class com.zhend.wordcount.WordCount 
+--master yarn
+--deploy-mode cluster \ 
+--driver-memory 1g 	\
+--executor-memory 1g	\
+--executor-cores 2	\
+--queue default		\ 
+/workplace/spark/spark_stu.jar  
+hdfs://192.168.200.21:9000/source/sparkFile/word.txt 
+hdfs://192.168.200.21:9000/result/sparkWC2/
+
+
+
+
+
+

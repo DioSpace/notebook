@@ -1,0 +1,25 @@
+启动kafka之前需启动zookeeper，然后启动kafka，各个节点需单独启动
+cd /data/yunva/kafka/config
+kafka-server-start.sh server.properties
+
+
+通过创建一个topic来测试是否能成功运行，随便选择一个节点运行
+kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic "test"                        //单击
+kafka-topics.sh --create --zookeeper localhost:2181,slaver1:2181,slaver2:2181,slaver3:2181 --replication-factor 4 --partitions 4 --topic test    //集群
+
+Created topic "test".
+出现这个即表示创建test成功
+
+
+查看topic
+kafka-topics.sh --list --zookeeper localhost:2181
+kafka-topics.sh --list --zookeeper master:2181,slaver1:2181,slaver2:2181,slaver3:2181
+
+删除topic
+kafka-topics.sh --zookeeper master:2181 --delete --topic test
+
+发送和消费数据
+发送数据
+kafka-console-producer.sh --broker-list master:2181,slaver1:2181,slaver2:2181,slaver3:2181 --topic test1
+消费数据
+kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning

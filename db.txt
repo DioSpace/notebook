@@ -1,0 +1,4 @@
+hostnamectl set-hostname slaver
+vi /etc/sysconfig/network-scripts/ifcfg-ens33
+
+scp -r jdk1.8.0_144/ root@slaver1:`pwd`

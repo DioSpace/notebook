@@ -1,0 +1,8 @@
+//启动 模拟器上的 app
+adb shell am start -D -n <包名>/<类名>   #如: com.didi_ctf.flagapp/.FlagActivity
+
+//查看 模拟器上的 所有进程
+adb shell ps
+
+//Android Studio 的端口转发
+adb forward tcp:<Android Studio中配置的端口> jdwp:<模拟器上的运行的app所在的进程>

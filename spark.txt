@@ -1,0 +1,25 @@
+sbin/start-all.sh
+
+bin/spark-shell --master spark://192.168.200.21:7077
+bin/spark-shell --master spark://192.168.200.21:7077 --total-executor-cores 2 --executor-memory 1g
+
+sc.textFile("/workplace/sparkSoreFile/word.txt").flatMap(_.split(" ")).map((_,1)).reduceByKey(_+_).collect
+sc.textFile("hdfs://master:9000/source/sparkFile/word.txt").flatMap(_.split(" ")).map((_,1)).reduceByKey(_+_).sortBy(_._2, false).collect
+
+sc.textFile("hdfs://master:9000/source/sparkFile/word.txt").flatMap(_.split(" ")).map((_,1)).reduceByKey(_+_).sortBy(_._2, false)      \
+.saveAsTextFile("hdfs://master:9000/result/sparkFile")
+
+sc.textFile("hdfs://master:9000/source/sparkFile/word.txt").flatMap(_.split(" ")).map((_,1)).reduceByKey(_+_, 1).sortBy(_._2, false)      \
+.saveAsTextFile("hdfs://master:9000/result/sparkFile")
+
+//提交并运行spark 架包
+spark-submit --master spark://192.168.200.21:7077
+--class com.zhend.wordcount.WordCount 
+--executor-memory 512m --total-executor-cores 2  
+spark_stu.jar  
+hdfs://192.168.200.21:9000/source/sparkFile/word.txt 
+hdfs://192.168.200.21:9000/result/sparkWC/
+
+
+
+./bin/spark-shell --master yarn --deploy-mode client

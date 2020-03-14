@@ -1,0 +1,17 @@
+//改ip
+cd /etc/sysconfig/network-scripts/
+vi ifcfg-ens33
+vi /etc/sysconfig/network-scripts/ifcfg-ens33
+
+//改主机名
+hostnamectl set-hostname slaver
+
+//虚拟机装插件 往虚拟机传文件
+yum install -y lrzsz
+
+//永久关防火墙
+systemctl disable firewalld
+//暂时关防火墙
+systemctl stop firewalld
+
+ssh 192.168.200.1

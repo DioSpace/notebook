@@ -1,0 +1,80 @@
+create table t_sz01(id int, name string) row format delimited fields terminated by ',';
+
+select id,name from t_sz01 order by name;
+
+create external table t_sz_ext(id int, name string) 
+row format delimited fields terminated by '\t' 
+stored as textfile   
+location '/class03';
+
+load data local inpath '/workplace/m3/tt.txt' into table t_sz_ext;
+
+create table t_sz_part(id int, name string)
+partitioned by (country string)
+row format delimited
+fields terminated by ',';
+
+load data local inpath '/workplace/m3/test.txt' into table t_sz_part partition(country='China');
+
+select count(1) from t_sz_part where country='China';
+
+alter table t_sz_part add partition (country='American');
+
+alter table t_sz_part drop partition (country='American');
+
+create table t_buck(id string, name string)
+clustered by (id)
+sorted by (id)
+into 4 buckets
+row format delimited 
+fields terminated by ',';
+
+load data local inpath '/workplace/m3/bucket_text.txt' into table t_buck;
+
+create table t_p(id string, name string)
+row format delimited 
+fields terminated by ',';
+
+insert into table t_buck
+select id,name from t_p
+
+//指定开启分桶
+set hive.enforce.bucketing = true;
+set mapreduce.job.reduces = 4;
+
+
+select id,name from t_p sort by (id);
+
+insert into table t_buck
+select id,name from t_p distribute by(id) sort by (id);
+
+insert into table t_buck
+select id,name from t_p cluster by(id);
+
+add jar /workplace/jarFile/udfToLower.jar;
+create temporary function tolow as 'com.hadoop.hive.ToLowerCase';
+select id,tolow(name) from t_p;
+
+create table t_json(line string)
+row format delimited;
+
+load data local inpath '/workplace/source/rating.json' into table t_json;
+
+add jar /workplace/jarFile/udfJsonParser.jar;
+create temporary function parsejson as 'com.hadoop.hive.JsonParser';
+select parsejson(line) from t_json;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

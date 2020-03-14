@@ -1,0 +1,29 @@
+/var/www/html/ambari/ambari/ambari/centos7/2.6.0.0-267
+/var/www/html/ambari/ambari/ambari/centos7/2.6.0.0-267/RPM-GPG-KEY/RPM-GPG-KEY-Jenkins
+
+/var/www/html/ambari/HDP/HDP
+
+
+/etc/yum.repos.d/
+http://192.168.200.10/ambari/HDP/centos7/2.6.3.0-235
+http://192.168.200.10/ambari/HDP-UTILS/
+
+
+systemctl start ntpd
+ambari-server start
+
+vi /etc/ambari-server/conf/ambari.properties
+
+master
+slaver1
+slaver2
+slaver3
+slaver4
+slaver5
+slaver6
+
+//时间表同步
+yum -y install ntp
+cd /usr/share/zoneinfo/Asia/
+ntpdate pool.ntp.org
+systemctl start ntpd && systemctl enable ntpd

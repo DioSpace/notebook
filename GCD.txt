@@ -1,0 +1,47 @@
+使用GCD方式从子线程回到主线程的方法代码
+dispatch_sync(dispatch_get_main_queue(), ^{ });
+
+
+// 使用Dispatch Group追加block到Global Group Queue,这些block如果全部执行完毕，就会执行Main Dispatch Queue中的结束处理的block。
+// 创建队列组
+dispatch_group_t group = dispatch_group_create();
+// 获取全局并发队列
+dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+dispatch_group_async(group, queue, ^{ /*加载图片1 */ });
+dispatch_group_async(group, queue, ^{ /*加载图片2 */ });
+dispatch_group_async(group, queue, ^{ /*加载图片3 */ }); 
+// 当并发队列组中的任务执行完毕后才会执行这里的代码
+dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        // 合并图片
+});
+
+
+dispatch_barrier_async（栅栏函数）的作用是什么？
+函数定义：dispatch_barrier_async(dispatch_queue_t queue, dispatch_block_t block);
+作用：
+	1.在它前面的任务执行结束后它才执行，它后面的任务要等它执行完成后才会开始执行。
+	2.避免数据竞争
+
+// 1.创建并发队列
+dispatch_queue_t queue = dispatch_queue_create("myQueue", DISPATCH_QUEUE_CONCURRENT);
+// 2.向队列中添加任务
+dispatch_async(queue, ^{  // 1.2是并行的
+    NSLog(@"任务1, %@",[NSThread currentThread]);
+});
+dispatch_async(queue, ^{
+    NSLog(@"任务2, %@",[NSThread currentThread]);
+});
+
+dispatch_barrier_async(queue, ^{
+    NSLog(@"任务 barrier, %@", [NSThread currentThread]);
+});
+
+dispatch_async(queue, ^{   // 这两个是同时执行的
+    NSLog(@"任务3, %@",[NSThread currentThread]);
+});
+dispatch_async(queue, ^{
+    NSLog(@"任务4, %@",[NSThread currentThread]);
+});
+
+// 输出结果: 任务1 任务2 ——》 任务 barrier ——》任务3 任务4 
+// 其中的任务1与任务2，任务3与任务4 由于是并行处理先后顺序不定。

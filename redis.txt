@@ -1,0 +1,71 @@
+//在后台启动redis进程   (redis已经做了对应的配置)
+/usr/local/redis/bin/redis-server /usr/local/redis/etc/redis.conf
+/apps/redis-3.0.6/src/redis-server /usr/local/cluster/7000/redis.conf
+/usr/local/redis3.0/src/redis-server /usr/local/cluster/7000/redis.conf    //**** 1
+//启动redis服务进程
+/usr/local/redis/bin/redis-server
+
+//启动redis客户端
+/usr/local/redis/bin/redis-cli
+/usr/local/redis/bin/redis-cli -c -p 7000
+/apps/redis-3.0.6/src/redis-cli -c -p 7000
+/usr/local/redis3.0/src/redis-cli -c -p 7000                    ///**** 3
+
+
+停止redis实例
+/usr/local/redis3.0/src/redis-cli shutdown
+或者
+pkill redis-server
+
+//创建集群          //***** 2
+/usr/local/redis3.0/src/redis-trib.rb  create --replicas 1 192.168.200.11:7000 192.168.200.12:7001 192.168.200.13:7002 192.168.200.14:7003 192.168.200.15:7004 192.168.200.16:7005
+
+//查看集群状态
+/usr/local/redis3.0/src/redis-cli -c -p 7001 cluster nodes
+
+set name "lzd"
+get name
+//散列/哈希		Redis散列/哈希(Hashes)是键值对的集合。Redis散列/哈希是字符串字段和字符串值之间的映射。
+HMSET ukey username "yiibai" password "passswd123" points 200
+HGETALL ukey 		//取所有哈希数据
+hget ukey username	//取username所对应的value
+//列表			Redis列表只是字符串列表，按插入顺序排序。
+lpush alist redis
+lpush alist mongodb
+lpush alist sqlite
+lrange alist 0 10 
+//集合			Redis集合是字符串的无序集合。在Redis中，您可以添加，删除和测试成员存在的时间O(1)复杂性。
+sadd yiibailist redis
+sadd yiibailist mongodb 
+sadd yiibailist sqlite
+sadd yiibailist sqlite 
+smembers yiibailist 
+//可排序集合	Redis可排序集合类似于Redis集合，是不重复的字符集合。 不同之处在于，排序集合的每个成员都与分数相关联，
+这个分数用于按最小分数到最大分数来排序的排序集合。虽然成员是唯一的，但分数值可以重复。
+zadd yiibaiset 0 redis
+zadd yiibaiset 0 mongodb
+zadd yiibaiset 1 sqlite
+zadd yiibaiset 1 sqlite
+ZRANGEBYSCORE yiibaiset 0 1000
+
+
+KEYS *		//获取数据库的所有key
+flushdb 命令清除数据，只会清除当前的数据库下的数据，不会影响到其他数据库。
+
+
+/****************************** windows下redis操作 *************************************/
+首先在cmd黑窗中进入redis所在目录  d:   cd D:\redis
+//启动redis服务进程
+redis-server.exe redis.windows.conf --maxmemory 200M
+//启动redis客户端
+redis-cli.exe
+
+
+
+
+
+
+
+
+
+

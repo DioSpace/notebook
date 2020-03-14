@@ -1,0 +1,166 @@
+a1.sources = r1
+a1.sinks = k1
+a1.channels = c1
+
+a1.sources.r1.type = netcat
+a1.sources.r1.bind = master
+a1.sources.r1.port = 44444
+a1.sources.r1.channels = c1
+
+a1.channels.c1.type = memory
+a1.channels.c1.capacity = 1000
+a1.channels.c1.transactionCapacity = 100
+
+a1.sinks.k1.type = logger
+a1.sinks.k1.channel = c1
+
+bin/flume-ng agent --conf conf --conf-file conf/netcat-logger.conf --name a1 -Dflume.root.logger=INFO,console
+
+telnet master 4444
+======================================================================================
+
+# Name the components on this agent
+a1.sources = r1
+a1.sinks = k1
+a1.channels = c1
+
+# Describe/configure the source
+a1.sources.r1.type = spooldir
+a1.sources.r1.spoolDir = /home/hadoop/flumespool
+a1.sources.r1.fileHeader = true
+
+# Describe the sink
+a1.sinks.k1.type = logger
+
+# Use a channel which buffers events in memory
+a1.channels.c1.type = memory
+a1.channels.c1.capacity = 1000
+a1.channels.c1.transactionCapacity = 100
+
+# Bind the source and sink to the channel
+a1.sources.r1.channels = c1
+a1.sinks.k1.channel = c1
+
+bin/flume-ng agent -c ./conf -f ./conf/spooldir-hdfs.conf -n a1 -Dflume.root.logger=INFO,console
+
+======================================================================================
+
+# Name the components on this agent
+a1.sources = r1
+a1.sinks = k1
+a1.channels = c1
+
+# Describe/configure the source
+a1.sources.r1.type = exec
+a1.sources.r1.command = tail -F /workplace/flumeExec/test.log
+a1.sources.r1.channels = c1
+
+# Describe the sink
+a1.sinks.k1.type = hdfs
+a1.sinks.k1.channel = c1
+a1.sinks.k1.hdfs.path = /flume/events/%y-%m-%d/%H%M/
+a1.sinks.k1.hdfs.filePrefix = events-
+a1.sinks.k1.hdfs.round = true
+a1.sinks.k1.hdfs.roundValue = 10
+a1.sinks.k1.hdfs.roundUnit = minute
+a1.sinks.k1.hdfs.rollInterval = 3
+a1.sinks.k1.hdfs.rollSize = 20
+a1.sinks.k1.hdfs.rollCount = 5
+a1.sinks.k1.hdfs.batchSize = 1
+a1.sinks.k1.hdfs.useLocalTimeStamp = true
+#生成的文件类型，默认是Sequencefile，可用DataStream，则为普通文本
+a1.sinks.k1.hdfs.fileType = DataStream
+
+# Use a channel which buffers events in memory
+a1.channels.c1.type = memory
+a1.channels.c1.capacity = 1000
+a1.channels.c1.transactionCapacity = 100
+
+# Bind the source and sink to the channel
+a1.sources.r1.channels = c1
+a1.sinks.k1.channel = c1
+
+bin/flume-ng agent -c conf -f conf/tail-hdfs.conf -n a1
+while true; do echo 11111111111111 >> test.log ; sleep 0.5; done
+
+======================================================================================
+多级agent串联
+
+# Name the components on this agent
+a1.sources = r1
+a1.sinks = k1
+a1.channels = c1
+
+# Describe/configure the source
+a1.sources.r1.type = exec
+a1.sources.r1.command = tail -F /workplace/flumeExec/test.log
+a1.sources.r1.channels = c1
+
+# Describe the sink
+a1.sinks = k1
+a1.sinks.k1.type = avro
+a1.sinks.k1.channel = c1
+a1.sinks.k1.hostname = follower01
+a1.sinks.k1.port = 4141
+a1.sinks.k1.batch-size = 2
+
+# Use a channel which buffers events in memory
+a1.channels.c1.type = memory
+a1.channels.c1.capacity = 1000
+a1.channels.c1.transactionCapacity = 100
+
+# Bind the source and sink to the channel
+a1.sources.r1.channels = c1
+a1.sinks.k1.channel = c1
+
+bin/flume-ng agent -c conf -f conf/tail-avro.conf -n a1
+-------------------------------------------------
+
+# Name the components on this agent
+a1.sources = r1
+a1.sinks = k1
+a1.channels = c1
+
+# Describe/configure the source
+a1.sources.r1.type = avro
+a1.sources.r1.channels = c1
+a1.sources.r1.bind = 0.0.0.0
+a1.sources.r1.port = 4141
+
+# Describe the sink
+a1.sinks.k1.type = logger
+
+# Use a channel which buffers events in memory
+a1.channels.c1.type = memory
+a1.channels.c1.capacity = 1000
+a1.channels.c1.transactionCapacity = 100
+
+# Bind the source and sink to the channel
+a1.sources.r1.channels = c1
+a1.sinks.k1.channel = c1
+
+bin/flume-ng agent -c conf -f conf/avro-logger.conf -n a1 -Dflume.root.logger=INFO,console
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
