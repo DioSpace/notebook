@@ -1,0 +1,34 @@
+1~创建模拟器（有真机可以忽略这个）
+2~在IDA里面找到android_server(dbgsrv目录)
+3~把android_server文件放到手机/data/local/tmp
+	adb push 文件名 /data/local/tmp
+4~打开一个cmd窗口：运行android_server
+	1)adb shell 连接手机
+	2）给一个最高权限：su
+	3）来到/data/local/tmp:cd /data/local/tmp
+	4)给androi_server一个最高的权限：chmod 777 android_server
+	5)查看android_server是否拥有权限：ls -l
+	6)运行andorid_server: ./android_server（端口号默认是：23946）
+	补充：运行andorid_server并且修改端口号：./android_server -p端口号
+5~端口转发：
+	adb forward tcp:端口号 tcp:端口号（之前转发的端口号是什么，这里就是什么） 
+6~打开DDMS：观察程序的端口号
+7~挂起程序：
+	adb shell am start -D -n 包名/类名
+	例子：adb shell am start -D -n com.example.javandk1/.MainActivity
+	补充：此时观察DDMS，被调试的程序前面有一个红色的虫子；
+8~IDA里面勾选三项
+	1）打开ida,选择debugger -第二项-Remote ARMlinux（第四项）
+	2）添加hostname和portt：
+		hostname：主机号（默认127.0.0.1）
+		port：端口号（之前android_server运行时的端口号或者端口转发的端口号）
+	3）出来进程列表：选择要调试的程序（可以ctrl+f，搜索包名）
+	4）进来后，勾选三项：
+	Suspend on process entry point程序入口点 断下
+	Suspend on thread start/exit线程的退出或启动 断下
+	Suspend on library load/unload库的加载和卸载 断下
+补充：可以直接在这里F9（左上角有一个三角形）运行程序，然后放手；
+         也可以，直接执行第九步，然后IDA运行程序
+9~挂载、释放（放手）
+	jdb -connect com.sun.jdi.SocketAttach:hostname=127.0.0.1,port=端口号(是ddms里显示的端口8600)
+	补充：此时观察DDMS，被调试的程序前面有一个绿色的虫子；
