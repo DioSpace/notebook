@@ -1,7 +1,7 @@
 //显示当前模拟器上的activity
 adb shell dumpsys activity top
 
-ddms 新版本调用 monitor. bat
+ddms 新版本调用 monitor.bat
 
 //搜正在运行的进程
 netstat -aon|findstr 5037
