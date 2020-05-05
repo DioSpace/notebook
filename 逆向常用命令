@@ -1,5 +1,12 @@
-//显示当前模拟器上的activity
-adb shell dumpsys activity top
+adb常用命令
+adb devices:显示当前连接的设备
+adb install:安装包路径
+adb shell dumpsys activity top 获取当前活动界面信息
+adb shell dumpsys package [packagename] 获取包信息
+adb shell dumpsys meminfo [pname/pid]  获取内存数据
+adb shell dumpsys dbinfo [packagename] 获取数据库文件
+adb shell pm list packages 列出当前所有已安装的程序包名
+adb shell pm path  [packagename] 获取指定程序所在路径
 
 ddms 新版本调用 monitor.bat
 
