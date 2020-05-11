@@ -1,0 +1,10 @@
+PostgreSQL 使用
+
+在默认配置条件下，本机访问PostgreSQL
+切换到Linux用户postgres，然后执行psql：
+su - postgres
+psql          (使用 psql -d [databasename] 可登录其他数据库)
+
+
+//显示所有表
+select * from pg_tables where schemaname = 'public';
