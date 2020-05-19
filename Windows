@@ -2,3 +2,7 @@ Windows
 
 //延迟关机
 shutdown -s -t 100
+//取消延迟关机
+shutdown /a
+
+xxx.bat //批处理文件
