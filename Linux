@@ -22,5 +22,6 @@ chmod 777 xxx
 后台运行
 ./xxx &
 
+解压
+tar	xvJf xxx.tar.xz 
 
-private void m8455(String str) {
