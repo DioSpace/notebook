@@ -2,7 +2,7 @@
 adb shell am start -D -n <包名>/<类名>   #如: com.didi_ctf.flagapp/.FlagActivity
 
 //查看 模拟器上的 进程
-adb shell ps | find "包名"
+adb shell ps | findstr "包名"
 
 //Android Studio 的端口转发
 xxxx: 参数1 Android Studio中配置的端口

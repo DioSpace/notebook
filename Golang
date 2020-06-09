@@ -1,0 +1,8 @@
+Golang
+
+Windows编译Golang工程为二进制文件,并在linux上运行
+set GOARCH=amd64
+set GOOS=linux
+go build xx.go
+chmod 777 xx
+./xx
