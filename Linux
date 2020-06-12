@@ -46,3 +46,7 @@ systemctl enable firewalld.service
 9.防火墙取消某一开放端口
 firewall-cmd --zone=public --remove-port=9200/tcp --permanent
 (注:开放端口或取消端口后,重要重启防火墙)
+
+
+wget下载(wget后跟下载链接)
+wget https://1.na.dl.wireshark.org/win64/Wireshark-win64-3.2.4.exe

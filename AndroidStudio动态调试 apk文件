@@ -1,5 +1,5 @@
 //启动 模拟器上的 app
-adb shell am start -D -n <包名>/<类名>   #如: com.didi_ctf.flagapp/.FlagActivity
+adb shell am start -D -n <包名>/<类名>   #如: com.youxiang.soyoungapp/com.youxiang.soyoungapp.ui.SplashActivity
 
 //查看 模拟器上的 进程
 adb shell ps | findstr "包名"

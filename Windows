@@ -5,4 +5,19 @@ shutdown -s -t 100
 //取消延迟关机
 shutdown /a
 
-xxx.bat //批处理文件
+
+//批处理文件
+xxx.bat
+
+
+//查看所有port
+netstat -ano
+//查看并过虑port
+netstat -ano | findstr 8700
+
+//查看并过虑进程
+ps | findstr 1920
+
+
+//杀进程
+kill 12308
