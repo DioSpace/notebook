@@ -10,8 +10,6 @@ adb shell pm path  [packagename] 获取指定程序所在路径
 
 ddms 新版本调用 monitor.bat
 
-//搜正在运行的进程
-netstat -aon|findstr 5037
 
 //允许调试
 android:debuggable="true"
@@ -27,3 +25,15 @@ const-wide/16 v0, 0x3
 
 //string
 const-string p1, "a"
+
+
+//导出单个xx.dex文件内容到指定目录
+E:\Android\Sdk\build-tools\25.0.2\dexdump -d classes2.dex > tmp.txt
+//ELF 二进制文件 反编译
+E:\Android\Sdk\ndk\21.0.6113669\toolchains\arm-linux-androideabi-4.9\prebuilt\windows-x86_64\bin\arm-linux-androideabi-objdump -S user >反汇编.txt
+E:\Android\Sdk\ndk\21.0.6113669\toolchains\arm-linux-androideabi-4.9\prebuilt\windows-x86_64\bin\arm-linux-androideabi-objdump -s user >节区.txt
+
+//生成jar
+.\gradlew makeJar
+//将导出的ishowtoast.jar转换成Dalvik可识别的dex格式
+E:\Android\Sdk\build-tools\29.0.3\.\dx.bat --dex --output=ishowtoast_dex.jar ishowtoast.jar

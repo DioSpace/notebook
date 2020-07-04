@@ -12,7 +12,7 @@
 	补充：运行andorid_server并且修改端口号：./android_server -p端口号
 5~端口转发：
 	adb forward tcp:端口号 tcp:端口号（之前转发的端口号是什么，这里就是什么） 
-6~打开DDMS：观察程序的端口号
+6~打开DDMS：观察程序的端口号(最新版用 monitor)
 7~挂起程序：
 	adb shell am start -D -n 包名/类名
 	例子：adb shell am start -D -n com.example.javandk1/.MainActivity
@@ -32,3 +32,19 @@
 9~挂载、释放（放手）
 	jdb -connect com.sun.jdi.SocketAttach:hostname=127.0.0.1,port=端口号(是ddms里显示的端口8600)
 	补充：此时观察DDMS，被调试的程序前面有一个绿色的虫子；
+
+
+
+dump内存数据的IDA脚本
+dexAddress		开始地址
+size			dump多少byte
+end				根据size算出结束地址
+static main(void) {
+	auto fp, dexAddress, end, size;
+	dexAddress = 0xA7019000;				
+	size = 0xA701B000;						
+	end = dexAddress + size;				
+	fp = fopen("F:\\classes.dex", "wb");
+	for ( ; dexAddress < end; dexAddress++ )
+	fputc(Byte(dexAddress), fp);
+}
