@@ -1,5 +1,6 @@
 adb常用命令
 adb devices:显示当前连接的设备
+adb -s xxxxx shell  //指定设备
 adb install:安装包路径
 adb shell dumpsys activity top 获取当前活动界面信息
 adb shell dumpsys package [packagename] 获取包信息
@@ -7,9 +8,12 @@ adb shell dumpsys meminfo [pname/pid]  获取内存数据
 adb shell dumpsys dbinfo [packagename] 获取数据库文件
 adb shell pm list packages 列出当前所有已安装的程序包名
 adb shell pm path  [packagename] 获取指定程序所在路径
+//导入文件到安卓系统
+adb push G:\resource\frida-server-12.8.14-android-arm /data/local/tmp
+//启动安卓应用
+adb shell am start D  -n com.liveapp.live/com.fanwe.hybrid.activity.InitActivity
 
 ddms 新版本调用 monitor.bat
-
 
 //允许调试
 android:debuggable="true"
@@ -37,3 +41,7 @@ E:\Android\Sdk\ndk\21.0.6113669\toolchains\arm-linux-androideabi-4.9\prebuilt\wi
 .\gradlew makeJar
 //将导出的ishowtoast.jar转换成Dalvik可识别的dex格式
 E:\Android\Sdk\build-tools\29.0.3\.\dx.bat --dex --output=ishowtoast_dex.jar ishowtoast.jar
+E:\Android\Sdk\build-tools\29.0.3\.\dx.bat --dex --no-strict --output=C:\Users\zhend\Desktop\shell\origin\JudgeInputStr.dex C:\Users\zhend\Desktop\shell\origin\JudgeInputStr.class
+
+
+NOP    00BF

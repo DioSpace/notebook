@@ -1,0 +1,7 @@
+创建项目
+vue init webpack projectName
+
+将对象转换为JSON格式字符串
+JSON.stringify(object)
+将JSON字符串转换为对象
+JSON.parse(jsonString)

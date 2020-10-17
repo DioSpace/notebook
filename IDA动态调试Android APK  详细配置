@@ -41,9 +41,9 @@ size			dump多少byte
 end				根据size算出结束地址
 static main(void) {
 	auto fp, dexAddress, end, size;
-	dexAddress = 0xA7019000;				
-	size = 0xA701B000;						
-	end = dexAddress + size;				
+	dexAddress = 0xA7019000;
+	size = 0xA701B000;				
+	end = dexAddress + size;			
 	fp = fopen("F:\\classes.dex", "wb");
 	for ( ; dexAddress < end; dexAddress++ )
 	fputc(Byte(dexAddress), fp);

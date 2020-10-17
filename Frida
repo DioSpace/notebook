@@ -1,0 +1,2 @@
+//frida 用命令行执行 js代码
+frida -U --no-pause -f xxxx(包名) -l F:/hook.js(js文件的完整路径)

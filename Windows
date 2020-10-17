@@ -13,7 +13,9 @@ xxx.bat
 //查看所有port
 netstat -ano
 //查看并过虑port
-netstat -ano | findstr 8700
+netstat -ano | findstr 5200
+//开放port
+telnet 134.175.224.245 5200
 
 //查看并过虑进程
 ps | findstr 1920

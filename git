@@ -59,3 +59,7 @@ git reset --hard commit_id 版本回退
 
 git pull 和 git fetch的区别
 https://www.cnblogs.com/ruiyang-/p/10764711.html
+
+git清除用户名密码
+git config --system --unset credential.helper
+之后再进行git操作时，弹出用户名密码窗口，输入即可
