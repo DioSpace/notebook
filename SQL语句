@@ -1,0 +1,16 @@
+SQL语句
+
+//创建数据库
+create database xxx;
+//创建表
+create table adv
+(
+    id       int auto_increment primary key,
+    platform varchar(32)          not null,
+    allow    tinyint(1) default 1 not null,
+    msg      varchar(255)         null
+);
+
+
+select allow from advertising_authority where platform = 'PlayBaby';
+select count(*) from advertising_authority where platform = 'KOK';

@@ -1,0 +1,18 @@
+SpringBoot
+
+项目打包
+//配置启动类
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.reverse.work.WorkApplication</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+//用maven打包
+mvn clean   //清理
+mvn install //打包

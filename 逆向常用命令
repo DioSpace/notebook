@@ -8,8 +8,13 @@ adb shell dumpsys meminfo [pname/pid]  获取内存数据
 adb shell dumpsys dbinfo [packagename] 获取数据库文件
 adb shell pm list packages 列出当前所有已安装的程序包名
 adb shell pm path  [packagename] 获取指定程序所在路径
+adb pull <手机路径>  <本机路径>  从手机中拉取信息到本地电脑上
+adb push <本机路径>  <手机路径>  从本地电脑推送信息到手机上
+
 //导入文件到安卓系统
 adb push G:\resource\frida-server-12.8.14-android-arm /data/local/tmp
+//从安卓系统导出文件到电脑上
+adb pull /sdcard/HttpCanary/download/*  F:\
 //启动安卓应用
 adb shell am start D  -n com.liveapp.live/com.fanwe.hybrid.activity.InitActivity
 

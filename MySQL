@@ -1,0 +1,43 @@
+MySQL
+
+//配置文件
+D:\mysql-8.0.22-winx64\my.ini
+
+//安装mysql服务, 服务器名mysql
+D:\mysql-8.0.22-winx64\bin\mysqld.exe --install mysql
+//启动mysql服务
+D:\mysql-8.0.22-winx64\bin\net start mysql
+//停止mysql服务
+D:\mysql-8.0.22-winx64\bin\net stop mysql
+
+
+Commond Line
+登录
+mysql -u root -p
+
+用户名:root
+密  码:1qaz2wsx
+
+
+---- linux ----
+一、 启动
+1、使用 service 启动：service mysql start
+2、使用 mysqld 脚本启动：/etc/inint.d/mysql start
+3、使用 safe_mysqld 启动：safe_mysql&
+
+二、停止
+1、使用 service 启动：service mysql stop
+2、使用 mysqld 脚本启动：/etc/inint.d/mysql stop
+3、mysqladmin shutdown
+
+三、重启
+1、使用 service 启动：service mysql restart
+2、使用 mysqld 脚本启动：/etc/inint.d/mysql restart
+
+四、查看mysql状态
+>>mysql
+
+
+
+登录
+mysql -u root -p

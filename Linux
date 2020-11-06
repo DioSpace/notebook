@@ -22,6 +22,9 @@ chmod 777 xxx
 后台运行
 ./xxx &
 
+//执行程序 忽视挂起
+nohup ./test.sh &
+
 查看进程信息
 ps -A 		//显示进程信息
 ps -u root 	//显示root进程用户信息
