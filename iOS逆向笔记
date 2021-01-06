@@ -1,0 +1,33 @@
+iOS逆向笔记
+
+# Cydia商店安装的一些常用软件
+OpenSSH						电脑连手机
+Apple File Conduit			便于iFunBox查看手机文件系统
+Cycript						调试脚本
+adv-cmds					命令行
+Reveal Loader				调试ui界面
+# Mac上安装的软件 
+iFunBox						查看手机文件系统
+爱思助手						手机助手(没啥用可以不装)
+usbmuxd						电脑通过usb连接手机					(homebrew安装)
+Reveal						与Reveal Loader配合调试ui界面			(下载地址:https://revealapp.com/)
+
+
+# Mac通过OpenSSL连接iPhone
+#1. (默认)通过网络连接到iPhone上的22端口
+ssh root@192.168.1.16
+密码:alpine
+#2. 通过usb连接到iPhone (通过usb传输数据,更稳定更快而且不受网络的影响)
+iproxy 2222 22    					先进行端口转发
+ssh root@localhost -p 2222			再进行连接
+
+
+# cycript调试
+ps -A | grep xxxx		#找出需调试的程序进程
+cycript -p  xxxx        #进程id或进程名 
+
+
+
+cycript -r   xx.xx.xx.xx:6666	#手机IP:6666,进入App调试页面。 端口6666可以在Xcode工程里自己设
+
+

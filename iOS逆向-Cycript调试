@@ -1,0 +1,48 @@
+iOS逆向-Cycript调试
+
+# Mac通过OpenSSL连接iPhone 后可以进行cycript进行app的调试
+
+# cycript调试
+ps -A | grep xxxx		#找出需调试的程序进程
+cycript -p  xxxx        #进程id或进程名 
+
+# 等价语法
+UIApp    
+等价于		
+[UIApplication sharedApplication];
+var keywindow = UIApp.keyWindow
+等价于
+var keywindow = [[UIApplication sharedApplication] keyWindow];
+
+
+# 显示当所页面所用到的所有类
+ObjectiveC.classes
+
+
+# 写OC代码 但用js的一些语法
+var userDefaults = [NSUserDefaults standardUserDefaults];
+[userDefaults setValue:@"a" forKey:@"A"];
+var value = [userDefaults valueForKey:@"A"];
+# 查看对象的成员变量
+*userDefaults
+
+# 根据内存取到对应的对象
+ #0x280724990
+# 再调用对应的方法
+[#0x280724990 valueForKey:@"A"];
+# 查看对象的成员变量
+*#0x280724990
+
+
+# 查看所有子控件
+# lldb 里可以打印所有子控件
+# po [self.view recursiveDescription]
+# cycript 也可以,下面这行代码打印window的所有子控件
+[UIApp.keyWindow recursiveDescription]
+[UIApp.keyWindow recursiveDescription].toString() # 转化成字符串
+
+
+# 筛选当前内存中所有 控件
+choose(UIViewController)
+choose(UITableViewCell)
+
