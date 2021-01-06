@@ -22,7 +22,7 @@ chmod 777 xxx
 后台运行
 ./xxx &
 
-//执行程序 忽视挂起
+//退出Xshell的时候继续运行进程，则需要使用nohup忽略hangup信号
 nohup ./test.sh &
 
 查看进程信息
@@ -59,7 +59,3 @@ firewall-cmd --zone=public --remove-port=9200/tcp --permanent
 
 wget下载(wget后跟下载链接)
 wget https://1.na.dl.wireshark.org/win64/Wireshark-win64-3.2.4.exe
-
-
-退出shell的时候继续运行进程，则需要使用nohup忽略hangup信号
-nohup ./test.sh &

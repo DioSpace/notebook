@@ -1,0 +1,9 @@
+tcpdump 命令
+
+sudo tcpdump -i eth0 -c1000  -nn -w webserver.pcap "port 443 and (src 183.228.88.203)" -A
+
+sudo tcpdump -i any -nn "port 8848 and (src 183.228.88.203  or src 103.100.211.187)" -A
+
+sudo tcpdump -i any -nn "port 8848 and (src 183.228.88.203  or src 103.100.211.187)" -A -w 111.pcap
+
+sudo tcpdump -i any -nn "port 443 and (src 183.228.88.203  or src 103.100.211.187)" -A
