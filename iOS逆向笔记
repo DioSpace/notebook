@@ -27,7 +27,5 @@ ps -A | grep xxxx		#找出需调试的程序进程
 cycript -p  xxxx        #进程id或进程名 
 
 
-
-cycript -r   xx.xx.xx.xx:6666	#手机IP:6666,进入App调试页面。 端口6666可以在Xcode工程里自己设
-
-
+# Unix like系统(iOS也是) 用Debian Package 安装xxx.deb文件
+dpkg -i xxx.deb

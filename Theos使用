@@ -1,0 +1,22 @@
+Theos使用
+
+# 配置Theos环境
+# 1.0 环境变量 
+vim ~/.bash_profile
+export THEOS=/opt/theos/
+# 1.1 签名工具 
+# 用来专门签名iOS可执行文件的工具,用以在越狱iOS中取代Xcode自带的codesign。如果不安装,那么产生的deb文件就安装不到手机上
+brew install ldid
+# 2.0 下载theos
+git clone --recursive https://github.com/theos/theos.git $THEOS
+# 3.0 创建工程
+# 在当前目录创建theos hook工程
+# 工程信息根据自己需要来填
+nic.pl
+
+# 写完hook功能 打包成 deb包 (都在创建的工程目录执行)
+make 			# 编译
+make package	# 打包
+
+# 把打成的deb包 拷贝到手机上
+dpkg -i xxx.deb     	# 在手机上安装 deb 包
