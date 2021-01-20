@@ -1,0 +1,39 @@
+tcpdump
+
+# 列出可以抓包的网络接口
+tcpdump -D
+# -n 显示 IP 地址，-nn 显示端口号
+# -c 限制 tcpdump 抓包的数量
+# 过虑 ICMP 报文
+sudo tcpdump -i any -c5 icmp
+# -X 以十六进制打印出数据报文内容，-A 打印数据报文的 ASCII 值
+# -r 阅读文件中的报文内容
+# -v 反馈来提示确实抓取到了数据包
+
+
+Linux 服务器上抓取tcp报文
+tcpdump -i eth0 port 10176 -w server.cap -C 50 
+# -i 指定网卡名 
+# -w 输出到文件 
+# -C 文件分割大小，单位M 
+# port 指定监听端口
+
+Android 上抓取tcp报文（如果无特殊需要抓一方的报文就够了）
+tcpdump -i any -p port 8883 -vv -s 0 -w sdcard/client.pcap
+# -i   指定网卡名
+# -w   输出到文件 
+# -C   文件分割大小，单位M
+# port 指定监听端口
+# -vv  输出详细报文
+# -s 0 不截取数据包
+
+
+sudo tcpdump -i eth0 -c 1000  -nn -w webserver.pcap "port 443 and (src 183.228.88.203)" -A
+sudo tcpdump -i any -nn "port 8848 and (src 183.228.88.203  or src 103.100.211.187)" -A
+sudo tcpdump -i eth0 -c 30 -v -nn port 8848 -A
+sudo tcpdump -i any -nn "port 8848 and (src 183.228.88.203  or src 103.100.211.187)" -A -w 111.pcap
+sudo tcpdump -i any -nn "port 443 and (src 183.228.88.203  or src 103.100.211.187)" -A
+
+sudo tcpdump -i eth0 -c 30 -nn -w webserver.pcap "port 8848 and (src 103.100.211.187 or dst 103.100.211.187)"
+sudo tcpdump -i eth0 -c 30 -nn -w webserver.pcap "port 8081 and (src 103.100.211.187 or dst 103.100.211.187)"
+sudo tcpdump -i eth0 -c 30 -v -nn "port 8081 and (src 183.228.88.203  or src 103.100.211.187)" -A

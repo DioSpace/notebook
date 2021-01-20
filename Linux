@@ -32,7 +32,7 @@ ps -ef 		//显示所有命令，连带命令行
 ps -ef | grep "name"
 
 解压
-tar	xvJf xxx.tar.xz 
+tar	xvJf xxx.tar.xz
 
 
 Linux 防火墙常用命令
@@ -59,3 +59,11 @@ firewall-cmd --zone=public --remove-port=9200/tcp --permanent
 
 wget下载(wget后跟下载链接)
 wget https://1.na.dl.wireshark.org/win64/Wireshark-win64-3.2.4.exe
+
+
+# 扫描开放的port
+nmap  www.anant.club
+# 监测外部ip地址的流量
+iftop
+# 追踪所访问的网站经过多少设备
+traceroute -n www.anant.club

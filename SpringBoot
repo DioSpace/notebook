@@ -16,3 +16,14 @@ SpringBoot
 //用maven打包
 mvn clean   //清理
 mvn install //打包
+
+
+// 从letsencrypt颁发的证书。 Spring Boot需要PKCS＃12格式的文件。这意味着您必须将密钥转换为PKCS＃12密钥库
+openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -out keystore.p12 -name tomcat -CAfile chain.pem -caname root
+
+//SpringBoot 项目里application.properties配置
+server.ssl.enabled=true
+server.ssl.key-store=/etc/letsencrypt/live/www.anant.club/keystore.p12
+server.ssl.key-store-password=1qaz2wsx
+server.ssl.keyStoreType=PKCS12
+server.ssl.keyAlias=tomcat
