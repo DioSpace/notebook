@@ -26,10 +26,12 @@ chmod 777 xxx
 nohup ./test.sh &
 
 查看进程信息
-ps -A 		//显示进程信息
-ps -u root 	//显示root进程用户信息
-ps -ef 		//显示所有命令，连带命令行
+ps -A 		// 显示进程信息
+ps -u root 	// 显示root进程用户信息
+ps -ef 		// 显示所有命令，连带命令行
 ps -ef | grep "name"
+ps -x       // 查看属于自己的进程
+
 
 解压
 tar	xvJf xxx.tar.xz
