@@ -59,16 +59,18 @@ firewall-cmd --zone=public --remove-port=9200/tcp --permanent
 (注:开放端口或取消端口后,重要重启防火墙)
 
 Ubuntu查看端口使用情况，使用netstat命令：
-    查看已经连接的服务端口（ESTABLISHED）
-    netstat -a
-    查看所有的服务端口（LISTEN，ESTABLISHED）
-    netstat -ap
+查看已经连接的服务端口（ESTABLISHED）
+netstat -a
+查看所有的服务端口（LISTEN，ESTABLISHED）
+netstat -ap
 查看指定端口，可以结合grep命令：
-    netstat -ap | grep 8080
- 也可以使用lsof命令：
-    lsof -i:8888
+netstat -ap | grep 8080
+也可以使用lsof命令：
+lsof -i:8080
+还有一个比较好用的命令，查看**端口：
+netstat -lnp | grep 8080
 若要关闭使用这个端口的程序，使用kill + 对应的pid
-    kill -9 PID号
+kill -9 PID号
 
 
 wget下载(wget后跟下载链接)
