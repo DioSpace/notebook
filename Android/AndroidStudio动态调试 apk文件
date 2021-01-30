@@ -1,10 +1,13 @@
-//启动 模拟器上的 app
+# 启动 模拟器上的 app
 adb shell am start -D -n <包名>/<类名>   #如: com.youxiang.soyoungapp/com.youxiang.soyoungapp.ui.SplashActivity
 
-//查看 模拟器上的 进程
+# 查看 模拟器上的 进程
 adb shell ps | findstr "包名"
 
-//Android Studio 的端口转发
+# 把待调试xxx.apk放到 AndroidKiller里获取到 完整的工程Project
+Android Studio 打开这个工程
+
+# Android Studio 的端口转发
 xxxx: 参数1 Android Studio中配置的端口
 yyyy: 参数2	模拟器上的运行的app所在的进程
 adb forward tcp:xxxx jdwp:yyyy

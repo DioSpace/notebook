@@ -1,0 +1,9 @@
+jeb动态调试步骤笔记
+
+# 1. 在机器上运行待调试 app
+adb shell am start -D -n  com.teamspeak.ts3client/com.teamspeak.ts3client.StartGUIFragment
+
+# 2. jeb打开待调试的xx.apk文件
+# 3. jeb完全加载xx.apk后, 在debugger选项,start 选择对应的手机和对应应用
+
+# 打断点 ctrl+B , 取消断点也是ctrl+B
