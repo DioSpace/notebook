@@ -26,6 +26,7 @@ keytool -importkeystore -srckeystore client.jks -destkeystore client.p12 -srcsto
 
 密码统一为  changeit
 
+##################### 下面是证书格式转换
 
 # Android 端生成bks证书(jdk里要添加bcprov-jdk15on-168.jar并作其他设置)
 # 1. 先将 jks转换对应的p12证书
@@ -33,5 +34,10 @@ keytool -importkeystore -srckeystore client.jks -destkeystore client2.p12 -srcst
 # 再将p12证书转换成bks证书 
 keytool -importkeystore -srckeystore client2.p12 -srcstoretype pkcs12 -destkeystore client.bks -deststoretype bks -provider org.bouncycastle.jce.provider.BouncyCastleProvider
 
+
 # 将bks转换成p12
 keytool -importkeystore -srckeystore client.bks -srcstoretype bks -destkeystore client3.p12 -deststoretype pkcs12 -provider org.bouncycastle.jce.provider.BouncyCastleProvider
+
+
+# 查看证书公钥
+keytool -list -rfc -keystore client.jks -storepass changeit
