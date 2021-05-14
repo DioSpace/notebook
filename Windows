@@ -16,6 +16,11 @@ netstat -ano
 netstat -ano | findstr 5200
 //开放port
 telnet 134.175.224.245 5200
+#防火墙开放3306端口
+netsh advfirewall firewall add rule name=mysql dir=in action=allow protocol=TCP localport=3306
+#防火墙删除3306端口
+netsh advfirewall firewall delete rule name=mysql protocol=tcp localport=3306
+
 
 //查看并过虑进程
 ps | findstr 1920

@@ -1,0 +1,87 @@
+letsencrypt 证书安装
+
+1. 环境
+
+操作系统：Ubuntu 20
+
+Webserver：Nginx
+
+ 
+2. 安装letsencrypt
+
+2.1. 安装letsencrypt之前，需要先安装snaps。
+
+a. 先安装epel。
+
+apt install epel-release
+
+b. 安装snapd。
+
+apt install snapd
+
+c. 启用snapd.socket。
+
+systemctl enable --now snapd.socket
+
+d. 创建/var/lib/snapd/snap和/snap之间的链接。
+
+ln -s /var/lib/snapd/snap /snap
+
+e. 退出账号并重新登录，或者重启系统，确保snap启用。
+
+f. 将snap更新至最新版本。
+
+snap install core
+
+snap refresh core
+
+ 
+2.2. 卸载已安装的certbot。
+
+如果之前在系统上已经部署过certbot，则需要先将其进行卸载。
+
+ 
+a. 卸载certbot。
+
+apt remove certbot
+
+
+b. 根据certbot安装位置删除相关文件。
+
+rm /usr/local/bin/certbot-auto
+
+ 
+c. 删除certbot附加软件包。
+
+rm -rf /opt/eff.org/certbot
+
+ 
+2.3. 安装certbot。
+
+a. 通过snap安装certbot。
+
+snap install --classic certbot
+
+ 
+b. 创建/snap/bin/certbot的软链接，方便certbot命令的使用。
+
+ln -s /snap/bin/certbot /usr/bin/certbot
+
+ 
+3. letsencrypt的使用
+
+3.1. 获取证书。
+
+a. 生成证书。
+
+确保nginx处于运行状态，需要获取证书的站点在80端口，并且可以正常访问。
+
+certbot certonly --nginx --email xxx@mail.com -d a.do.com -d b.do.com
+
+
+b. 更新nginx配置并重启nginx。
+
+ 
+3.2. 更新证书。(let encrypt证书的有效时间是90天)
+
+certbot renew

@@ -1,0 +1,52 @@
+Trojan VPN 搭建
+
+操作系统：Ubuntu 20
+
+
+一、准备工作
+所需设备：境外VPS，域名
+域名绑定到 VPS的主机ip
+
+(这些常识我这就不细述了)
+
+
+二、下面开始搭建了 
+运行下面这行命令,下载一键脚本
+wget --no-check-certificate https://raw.githubusercontent.com/jinwyp/one_click_script/master/trojan_v2ray_install.sh && chmod +x trojan_v2ray_install.sh && ./trojan_v2ray_install.sh
+
+按提示操作。
+1、选	2
+   安装 trojan 和 nginx 不支持CDN, trojan 运行在443端口
+2、输入域名,一路yes下去
+ jobs8.cn
+3、输入密码
+1qaz2wsX
+
+
+运行完成输出
+======================================================================
+    Trojan Version: 1.16.0 安装成功 !
+    伪装站点为 https://jobs8.cn
+    伪装站点的静态html内容放置在目录 /root/website/html, 可自行更换网站内容!
+    Trojan 服务器端配置路径 /root/trojan/server.json 
+    Trojan 运行日志文件路径: /root/trojan-access.log 
+    Trojan 查看日志命令: journalctl -n 50 -u trojan.service 
+    Trojan 停止命令: systemctl stop trojan.service  启动命令: systemctl start trojan.service  重启命令: systemctl restart trojan.service
+    Trojan 查看运行状态命令:  systemctl status trojan.service 
+    Trojan 服务器 每天会自动重启, 防止内存泄漏. 运行 crontab -l 命令 查看定时重启命令 !
+======================================================================
+----------------------------------------
+Trojan 配置信息如下, 请自行复制保存, 密码任选其一 !
+服务器地址: jobs8.cn  端口: 443
+密码1: b7c3e2365f
+密码2: 9ea9d7cb6c
+密码3: fe1df802a3
+密码4: dd3ea65692
+密码5: 8ea99bef87
+密码6: 1e4fa1e48a
+密码7: 07c002dbad
+密码8: 3fa053aa54
+密码9: 3cc449dfde
+密码10: 782e85a244
+您指定前缀的密码共99个: 从 1qaz2wsX202000 到 1qaz2wsX202099 都可以使用
+例如: 密码:1qaz2wsX202011 或 密码:1qaz2wsX202088 都可以使用
