@@ -1,5 +1,11 @@
 Objection
 
+
+"-U" 参数代表我们连接的是远程USB server
+"-f" 参数则表示在手机端启动一个你指定的android程序，那个FILE则表示应用的包名，通常"-f"这个参数配合"--no-pause"参数来使用，因为可能不让进程恢复的话可能会有奇怪的问题
+"-p" 与"-n"命令分别表示attach到进程的名字或者pid
+"-l" 参数则是代表需要注入的javascript脚本，而这个javascript的脚本就是我们所写的hook代码
+
 #frida 用命令行执行 js代码
 ## spawn模式(启动一个新的进程并挂起)
 frida -U --no-pause -f com.my.network(包名) -l F:/hook.js(js文件的完整路径)
