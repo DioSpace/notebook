@@ -1,6 +1,10 @@
-//frida 用命令行执行 js代码
-frida -U --no-pause -f xxxx(包名) -l F:/hook.js(js文件的完整路径)
+Objection
+
+#frida 用命令行执行 js代码
+## spawn模式(启动一个新的进程并挂起)
+frida -U --no-pause -f com.my.network(包名) -l F:/hook.js(js文件的完整路径)
+## attach模式(attach到已经存在的进程)
 frida -U com.my.network explore -l F:/hook1.js
 
 //过双进程过护
-frida -U -f com.uustock.dayi --no-pause
+frida -U --no-pause -f com.uustock.dayi

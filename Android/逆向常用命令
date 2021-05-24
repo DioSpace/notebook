@@ -1,5 +1,5 @@
 adb常用命令
-adb devices:显示当前连接的设备
+adb devices	显示当前连接的设备
 adb -s xxxxx shell  //指定设备
 adb install:安装包路径
 adb shell dumpsys activity top 获取当前活动界面信息
