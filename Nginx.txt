@@ -5,7 +5,7 @@ Nginx 操作
 #更新apt-get (已更新的就不用了)
 apt-get update
 
-#Nginx 安装
+#nginx 安装
 apt-get install nginx
 #查看nginx是否安装成功
 nginx -v
